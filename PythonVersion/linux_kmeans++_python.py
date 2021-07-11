@@ -8,7 +8,7 @@ class ball_k_means:
     def __init__(self, isDouble=1):
         self.isDouble = isDouble
 
-    def fit(self, s1, k, isRing = False, detail = False, random_seed=-1, s2="0"):
+    def fit(self, s1, k, isRing=False, detail=False, random_seed=-1, s2="0"):
         # isRing == 1 represent alg with rings
         # isRing == others represent alg with no rings
         temp = np.loadtxt(s1, dtype=float, delimiter=',')
@@ -20,29 +20,75 @@ class ball_k_means:
             dll = ctypes.cdll.LoadLibrary('./libballXD.so')
             dataptr = m.ctypes.data_as(ctypes.c_char_p)
             if s2 != '0':
-                dll.ball_kmeans_cent.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int,
-                                                 ctypes.c_bool, ctypes.c_bool, ctypes.c_char_p)
-                dll.ball_kmeans_cent(s1.encode('utf-8'), dataptr, lenth, isRing, detail, s2.encode('utf-8'))
+                dll.ball_kmeans_cent.argtypes = (
+                    ctypes.c_char_p,
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_bool,
+                    ctypes.c_bool,
+                    ctypes.c_char_p,
+                )
+                dll.ball_kmeans_cent(
+                    s1.encode('utf-8'),
+                    dataptr,
+                    lenth,
+                    isRing,
+                    detail,
+                    s2.encode('utf-8'),
+                )
             else:
-                dll.ball_kmeans_initk.argtypes = (ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_int,
-                                                  ctypes.c_bool, ctypes.c_bool, ctypes.c_int)
-                dll.ball_kmeans_initk(s1.encode('utf-8'), k, dataptr, lenth, isRing, detail, random_seed)
+                dll.ball_kmeans_initk.argtypes = (
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_bool,
+                    ctypes.c_bool,
+                    ctypes.c_int,
+                )
+                dll.ball_kmeans_initk(
+                    s1.encode('utf-8'), k, dataptr, lenth, isRing, detail, random_seed
+                )
         else:
             dll = ctypes.cdll.LoadLibrary('./libballXF.so')
             dataptr = m.ctypes.data_as(ctypes.c_char_p)
             if s2 != '0':
-                dll.ball_kmeans_cent.argtypes = (ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int,
-                                                 ctypes.c_bool, ctypes.c_bool, ctypes.c_char_p)
-                dll.ball_kmeans_cent(s1.encode('utf-8'), dataptr, lenth, isRing, detail, s2.encode('utf-8'))
+                dll.ball_kmeans_cent.argtypes = (
+                    ctypes.c_char_p,
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_bool,
+                    ctypes.c_bool,
+                    ctypes.c_char_p,
+                )
+                dll.ball_kmeans_cent(
+                    s1.encode('utf-8'),
+                    dataptr,
+                    lenth,
+                    isRing,
+                    detail,
+                    s2.encode('utf-8'),
+                )
             else:
-                dll.ball_kmeans_initk.argtypes = (ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_int,
-                                                  ctypes.c_bool, ctypes.c_bool, ctypes.c_int)
-                dll.ball_kmeans_initk(s1.encode('utf-8'), k, dataptr, lenth, isRing, detail, random_seed)
+                dll.ball_kmeans_initk.argtypes = (
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_char_p,
+                    ctypes.c_int,
+                    ctypes.c_bool,
+                    ctypes.c_bool,
+                    ctypes.c_int,
+                )
+                dll.ball_kmeans_initk(
+                    s1.encode('utf-8'), k, dataptr, lenth, isRing, detail, random_seed
+                )
         return m
-        
+
 
 if __name__ == '__main__':
     dataset_address = "../data+centers/dataset/birchdata.csv"
     clf = ball_k_means(isDouble=1)
-    m = clf.fit(dataset_address, 50, False, True, -1, "../data+centers/centroids/birch4.csv")
+    m = clf.fit(
+        dataset_address, 50, False, True, -1, "../data+centers/centroids/birch4.csv"
+    )
     print(m)

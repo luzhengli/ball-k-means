@@ -59,5 +59,12 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp"
     },
-    "python.pythonPath": "/home/ubuntu/anaconda3/bin/python"
+    "python.pythonPath": "/home/ubuntu/anaconda3/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "jupyter.jupyterServerType": "local",
+    "editor.fontFamily": "'Fira Code',Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true
 }
