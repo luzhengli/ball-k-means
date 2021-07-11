@@ -1,3 +1,5 @@
+> This repository was forked from https://github.com/syxiaa/ball-k-means.
+
 # ball-k-means
 
 * Ball k-means algorithms is described in detail in https://ieeexplore.ieee.org/document/9139397.
